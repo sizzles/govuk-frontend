@@ -13,23 +13,92 @@ const standard = require('gulp-standard')
 const gtenon = require('gulp-tenon-client')
 const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
-const cssnano = require('cssnano')
-const postcssnormalize = require('postcss-normalize')
+// const cssnano = require('cssnano')
+// const postcssnormalize = require('postcss-normalize')
 const merge = require('merge-stream')
 const replace = require('gulp-replace')
 const flatten = require('gulp-flatten')
-const rename = require('gulp-rename')
+// const rename = require('gulp-rename')
 const changed = require('gulp-changed')
 const filter = require('gulp-filter')
 
-// Styles build task ---------------------
-// Compiles CSS from Sass
-// Output both a minified and non-minified version into /public/stylesheets/
-// ---------------------------------------
-gulp.task('styles', cb => {
-  runsequence('scss:lint', 'scss:compile', 'scss:compile:ie', cb)
+// Create packages task -------------------
+// Run all required tasks in sequence
+// ----------------------------------------
+gulp.task('create:packages', cb => {
+  runsequence('scss:lint', 'prepare:files', 'prepare:packages', cb)
 })
 
+// Copy to temp ----------------------------
+// Copies to temp/ & autoprefix scss
+// -----------------------------------------
+gulp.task('prepare:files', () => {
+  let scssFiles = filter([paths.src + '**/*.scss'], {restore: true})
+  return gulp.src(paths.src + '**/*')
+    .pipe(changed(paths.packages))
+    .pipe(scssFiles)
+    .pipe(postcss([
+      autoprefixer,
+      require('postcss-nested')
+    ], {syntax: require('postcss-scss')}))
+    .pipe(scssFiles.restore)
+    .pipe(gulp.dest(paths.temp))
+})
+
+// Create packages -----------------------
+// Move relevant files & update readme
+// ----------------------------------------
+gulp.task('prepare:packages', () => {
+  let readmeComponents = filter([paths.temp + 'components/**/*.md'], {restore: true})
+
+  let components = gulp.src([paths.temp + 'components/**/*'])
+    .pipe(changed(paths.packages))
+    .pipe(replace('../../globals/scss', '@govuk-frontend/globals'))
+    .pipe(replace('../', '@govuk-frontend/'))
+    .pipe(readmeComponents)
+    .pipe(replace('<!--', ''))
+    .pipe(replace('-->', ''))
+    .pipe(readmeComponents.restore)
+    .pipe(flatten({includeParents: -1}))
+    .pipe(gulp.dest(paths.packages))
+
+  let readmeGlobals = filter([paths.temp + 'globals/**/*.md'], {restore: true})
+
+  let globals = gulp.src([
+    paths.temp + 'globals/scss/**/*',
+    '!' + paths.temp + 'globals/scss/govuk-frontend.scss',
+    '!' + paths.temp + 'globals/scss/govuk-frontend-oldie.scss'
+  ])
+    .pipe(changed(paths.packages))
+    .pipe(replace('../../components', '@govuk-frontend'))
+    .pipe(readmeGlobals)
+    .pipe(replace('<!--', ''))
+    .pipe(replace('-->', ''))
+    .pipe(readmeGlobals.restore)
+    .pipe(flatten({
+      newPath: 'globals',
+      includeParents: -1
+    }))
+    .pipe(gulp.dest(paths.packages))
+
+  return merge(components, globals)
+})
+
+// Update dist ----------------------------
+// Update dist with latest plus version.txt
+// ----------------------------------------
+gulp.task('update:dist', () => {
+  let pkg = require('./' + paths.packages + 'all/package.json')
+  let fs = require('fs')
+  fs.writeFileSync(paths.dist + 'VERSION.txt', pkg.version)
+
+  return gulp.src([paths.temp + '**/*', '!' + paths.temp + 'index.html'])
+    .pipe(gulp.dest(paths.dist))
+})
+
+// Scss lint task -----------------------
+// Check all is in order
+// -----------------------------------------
 gulp.task('scss:lint', () => {
   return gulp.src(paths.src + '**/*.scss')
     .pipe(sasslint({
@@ -39,33 +108,22 @@ gulp.task('scss:lint', () => {
     .pipe(sasslint.failOnError())
 })
 
+// Scss lint task -----------------------
+// Check all is in order
+// -----------------------------------------
 gulp.task('scss:compile', () => {
-  let processors = [
-    autoprefixer,
-    postcssnormalize,
-    cssnano
-  ]
-  let compileAll = gulp.src(paths.globalScss + '**/*.scss')
+  let compile = gulp.src(paths.globalScss + 'govuk-frontend.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(postcss(processors))
-    .pipe(gulp.dest(paths.distCss))
-
-  let prefixScss = gulp.src(paths.src + '**/*.scss')
     .pipe(postcss([
-      autoprefixer,
-      require('postcss-nested')
-    ], {syntax: require('postcss-scss')}))
-    .pipe(gulp.dest(paths.dist))
+      autoprefixer
+    ]))
+    .pipe(gulp.dest(paths.previewCss))
 
-  return merge(compileAll, prefixScss)
-})
-
-// Compile old IE compatible CSS ---------
-// ---------------------------------------
-gulp.task('scss:compile:ie', () => {
-  let compileAllForOldIe = gulp.src(paths.distCss + '*-oldie.css')
+  let compileOldIe = gulp.src(paths.globalScss + 'govuk-frontend-oldie.scss')
+    .pipe(sass().on('error', sass.logError))
     .pipe(
       postcss([
+        autoprefixer,
         require('oldie')({
           rgba: {filter: true},
           rem: {disable: true},
@@ -74,73 +132,50 @@ gulp.task('scss:compile:ie', () => {
         })
       ])
     )
-    .pipe(gulp.dest(paths.distCss))
+    .pipe(gulp.dest(paths.previewCss))
 
-  // oldie doesn't currently work when source is scss. author checking
-  // let prefixScssIe = gulp.src(paths.src + '**/*.scss')
-  //   .pipe(postcss([
-  //     autoprefixer,
-  //     require('oldie')({
-  //       rgba: {filter: true},
-  //       rem: {disable: true},
-  //       unmq: {disable: true}
-  //       // more rules go here
-  //     }),
-  //     require('postcss-nested')
-  //   ], {syntax: require('postcss-scss')}))
-  //   .pipe(gulp.dest(paths.dist))
-
-  return merge(compileAllForOldIe)
+  return merge(compile, compileOldIe)
 })
 
-// Create packages -----------------------
-// Creates packages for npm publish
+// Compile old IE compatible CSS ---------
 // ---------------------------------------
-gulp.task('create:package', () => {
-  let filterComponents = filter([paths.components + '**/*.scss'], {restore: true})
-  let readmeComponents = filter([paths.components + '**/*.md'], {restore: true})
-  let components = gulp.src([paths.components + '**/*'])
-    .pipe(changed(paths.packages))
-    .pipe(replace('../../globals/scss', '@govuk-frontend/globals'))
-    .pipe(replace('../', '@govuk-frontend/'))
-    .pipe(filterComponents)
-    .pipe(postcss([
-      autoprefixer,
-      require('postcss-nested')
-    ], {syntax: require('postcss-scss')}))
-    .pipe(filterComponents.restore)
-    .pipe(readmeComponents)
-    .pipe(replace('<!--', ''))
-    .pipe(replace('-->', ''))
-    .pipe(readmeComponents.restore)
-    .pipe(flatten({includeParents: -1}))
-    .pipe(gulp.dest(paths.packages))
-  let filterGlobals = filter([paths.globalScss + '**/*.scss'], {restore: true})
-  let readmeGlobals = filter([paths.globalScss + '**/*.md'], {restore: true})
-  let globals = gulp.src([
-    paths.globalScss + '**/*',
-    '!' + paths.globalScss + 'govuk-frontend.scss',
-    '!' + paths.globalScss + 'govuk-frontend-oldie.scss'
-  ])
-    .pipe(changed(paths.packages))
-    .pipe(replace('../../components', '@govuk-frontend'))
-    .pipe(filterGlobals)
-    .pipe(postcss([
-      autoprefixer,
-      require('postcss-nested')
-    ], {syntax: require('postcss-scss')}))
-    .pipe(filterGlobals.restore)
-    .pipe(readmeGlobals)
-    .pipe(replace('<!--', ''))
-    .pipe(replace('-->', ''))
-    .pipe(readmeGlobals.restore)
-    .pipe(flatten({includeParents: 1}))
-    .pipe(rename({
-      dirname: 'globals'
-    }))
-    .pipe(gulp.dest(paths.packages))
+// gulp.task('scss:compile:ie', () => {
+//   let compileAllForOldIe = gulp.src(paths.distCss + '*-oldie.css')
+//     .pipe(
+//       postcss([
+//         require('oldie')({
+//           rgba: {filter: true},
+//           rem: {disable: true},
+//           unmq: {disable: true}
+//           // more rules go here
+//         })
+//       ])
+//     )
+//     .pipe(gulp.dest(paths.distCss))
+//
+//   // oldie doesn't currently work when source is scss. author checking
+//   // let prefixScssIe = gulp.src(paths.src + '**/*.scss')
+//   //   .pipe(postcss([
+//   //     autoprefixer,
+//   //     require('oldie')({
+//   //       rgba: {filter: true},
+//   //       rem: {disable: true},
+//   //       unmq: {disable: true}
+//   //       // more rules go here
+//   //     }),
+//   //     require('postcss-nested')
+//   //   ], {syntax: require('postcss-scss')}))
+//   //   .pipe(gulp.dest(paths.dist))
+//
+//   return merge(compileAllForOldIe)
+// })
 
-  return merge(components, globals)
+// Styles build task ---------------------
+// Compiles CSS from Sass
+// Output both a minified and non-minified version into /public/stylesheets/
+// ---------------------------------------
+gulp.task('styles', cb => {
+  runsequence('scss:lint', 'scss:compile', cb)
 })
 
 // Scripts build tasks --------------------
@@ -149,8 +184,9 @@ gulp.task('create:package', () => {
 gulp.task('js:compile', () => {
   return gulp.src([paths.src + '**/*.js'])
     .pipe(concat('govuk-frontend.js'))
-    .pipe(gulp.dest(paths.dist + 'js'))
+    .pipe(gulp.dest(paths.previewJs))
 })
+
 gulp.task('js:lint', () => {
   return gulp.src([paths.components + '**/*.js'])
     .pipe(standard())
@@ -188,7 +224,7 @@ gulp.task('dev', cb => {
 // Creates a server to preview components
 // ---------------------------------------
 gulp.task('serve', () => {
-  const server = gls.static(paths.dist, 8888)
+  const server = gls.static(paths.preview, 8888)
   server.start()
 })
 
@@ -204,10 +240,10 @@ gulp.task('preview:components', () => {
       return '<div class="component">' + file.contents.toString('utf8') + '</div>'
     }
   }))
-  .pipe(inject(gulp.src(paths.distCss + '*-oldie.css', {read: false}), {starttag: '<!- - oldie:css - ->', endtag: '<!- - oldieend:css - ->', ignorePath: paths.dist}))
-  .pipe(inject(gulp.src([paths.distCss + '*.css', '!' + paths.distCss + '*-oldie.css'], {read: false}), {name: 'head', ignorePath: paths.dist}))
-  .pipe(inject(gulp.src([paths.distJs + '*.js', paths.distJs], {read: false}), {ignorePath: paths.dist}))
-  .pipe(gulp.dest(paths.dist))
+  .pipe(inject(gulp.src(paths.previewCss + '*-oldie.css', {read: false}), {starttag: '<!- - oldie:css - ->', endtag: '<!- - oldieend:css - ->', ignorePath: paths.preview}))
+  .pipe(inject(gulp.src([paths.previewCss + '*.css', '!' + paths.previewCss + '*-oldie.css'], {read: false}), {name: 'head', ignorePath: paths.preview}))
+  .pipe(inject(gulp.src([paths.previewJs + '*.js', paths.previewJs], {read: false}), {ignorePath: paths.preview}))
+  .pipe(gulp.dest(paths.preview))
   gulp.start('copy:images')
 })
 
@@ -237,11 +273,11 @@ gulp.task('html:tenon', function () {
 })
 
 // Copy images --------------------------
-// Copy images to dist for component preview
+// Copy images to preview for component preview
 // ---------------------------------------
 gulp.task('copy:images', () => {
   return gulp.src(paths.globalImages + '**/*')
-    .pipe(gulp.dest(paths.dist + 'images'))
+    .pipe(gulp.dest(paths.preview + 'images'))
 })
 
 // Default task --------------------------
