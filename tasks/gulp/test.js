@@ -23,6 +23,7 @@ gulp.task('html:tenon', function () {
 // ---------------------------------------
 gulp.task('html:axe', (done) => {
   let options = {
+    showOnlyViolations: true, // Returns only the results with the accessibility issues
     browser: 'phantomjs',
     saveOutputIn: 'axeReport.json',
     urls: ['public/components/**/*.html'],
