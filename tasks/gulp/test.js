@@ -24,6 +24,7 @@ gulp.task('html:tenon', function () {
 gulp.task('html:axe', (done) => {
   let options = {
     showOnlyViolations: true, // Returns only the results with the accessibility issues
+    threshold: 0, // A number that represents the maximum number of allowable violations
     browser: 'phantomjs',
     saveOutputIn: 'axeReport.json',
     urls: ['public/components/**/*.html'],
