@@ -3,6 +3,6 @@
   "version": "0.0.11-alpha",
   "dependencies": {
     "@govuk-frontend/globals": "^0.0.11-alpha",
-    "@govuk-frontend/phase-tag": "^0.0.11-alpha"
+    "@govuk-frontend/tag": "^0.0.11-alpha"
   }
 }
