@@ -1,8 +1,8 @@
 {
   "name": "@govuk-frontend/checkbox",
-  "version": "0.0.12-alpha",
+  "version": "0.0.13-alpha",
   "dependencies": {
-    "@govuk-frontend/globals": "^0.0.12-alpha",
-    "@govuk-frontend/label": "^0.0.12-alpha"
+    "@govuk-frontend/globals": "^0.0.13-alpha",
+    "@govuk-frontend/label": "^0.0.13-alpha"
   }
 }
