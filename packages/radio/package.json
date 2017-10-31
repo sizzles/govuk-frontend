@@ -1,8 +1,8 @@
 {
   "name": "@govuk-frontend/radio",
-  "version": "0.0.14-alpha",
+  "version": "0.0.15-alpha",
   "dependencies": {
-    "@govuk-frontend/globals": "^0.0.14-alpha",
-    "@govuk-frontend/label": "^0.0.14-alpha"
+    "@govuk-frontend/globals": "^0.0.15-alpha",
+    "@govuk-frontend/label": "^0.0.15-alpha"
   }
 }
