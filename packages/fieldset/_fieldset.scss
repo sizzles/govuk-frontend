@@ -1,6 +1,6 @@
 @import "@govuk-frontend/globals/import-once";
 @import "@govuk-frontend/globals/vars";
-@import "utilities/clearfix";
+@import "@govuk-frontend/globals/utilities/clearfix";
 
 @include exports("fieldset") {
   .govuk-c-fieldset {
