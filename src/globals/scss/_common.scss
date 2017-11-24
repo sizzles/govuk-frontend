@@ -10,7 +10,9 @@
 @import "settings/colours-applied";
 @import "settings/spacing";
 @import "settings/measurements";
-@import "settings/font-stack";
+@import "settings/typography-font-stacks";
+@import "settings/typography-font";
+@import "settings/typography-responsive";
 @import "settings/media-queries";
 @import "settings/paths";
 
@@ -27,6 +29,7 @@
 @import "helpers/device-pixels";
 @import "helpers/clearfix";
 @import "helpers/visually-hidden";
+@import "helpers/typography";
 
 // Core
 @import "core/links";
@@ -39,3 +42,4 @@
 
 // Overrides
 @import "overrides/spacing";
+@import "overrides/typography";
