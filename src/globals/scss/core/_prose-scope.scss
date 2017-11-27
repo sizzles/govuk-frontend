@@ -1,0 +1,48 @@
+@include exports("prose-scope") {
+
+  .govuk-prose-scope {
+
+    h1 {
+      @extend .govuk-heading-xl;
+    }
+
+    h2 {
+      @extend .govuk-heading-l;
+    }
+
+    h3 {
+      @extend .govuk-heading-m;
+    }
+
+    h4 {
+      @extend .govuk-heading-s;
+    }
+
+    p {
+      @extend .govuk-body;
+    }
+
+    // Contextual adjustments
+
+    // Add a negative top margin to headings that appear directly after other
+    // headings
+
+    h2 + h3 {
+      @extend %heading-m-after-heading-l;
+    }
+
+    h3 + h4 {
+      @extend %heading-s-after-heading-m;
+    }
+
+    // Add top padding to headings that appear directly after paragraphs
+    
+    p + h2 {
+      @extend %heading-l-after-body;
+    }
+
+    p + h3 {
+      @extend %heading-m-after-body;
+    }
+  }
+}

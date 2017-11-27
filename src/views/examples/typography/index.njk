@@ -1,112 +1,822 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-<!-- This is missing from GOV.UK elements -->
-<!-- Services should not be using text this small -->
-<div class="govuk-u-core-14">
-  GOV.UK frontend toolkit 14px core text
-</div>
-<!-- In GOV.UK elements, this is .font-xsmall -->
-<div class="govuk-u-core-16">
-  GOV.UK frontend toolkit + GOV.UK elements 16px core text
-</div>
-<!-- In GOV.UK elements, this is .font-small -->
-<div class="govuk-u-core-19">
-  GOV.UK frontend toolkit + GOV.UK elements 19px core text
-</div>
-<!-- In GOV.UK elements, this is .lede -->
-<!-- In GOV.UK elements, this is .font-medium -->
-<div class="govuk-u-core-24">
-  GOV.UK frontend toolkit + GOV.UK elements 24px core text
-</div>
-<!-- This is missing from GOV.UK elements -->
-<div class="govuk-u-core-27">
-  GOV.UK frontend toolkit 27px core text
-</div>
-<!-- In GOV.UK elements, this is .font-large -->
-<div class="govuk-u-core-36">
-  GOV.UK frontend toolkit + GOV.UK elements 36px core text
-</div>
-<!-- In GOV.UK elements, this is .font-xlarge -->
-<div class="govuk-u-core-48">
-  GOV.UK frontend toolkit + GOV.UK elements 48px core text
-</div>
-<!-- In GOV.UK elements, this is .font-xxlarge -->
-<div class="govuk-u-core-80">
-  GOV.UK frontend toolkit + GOV.UK elements 80px core text
+
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+
+    <div class="govuk-prose-scope">
+      <h1 style="margin-top: 40px;">GOV.UK Frontend Typography and Spacing</h1>
+
+      <h2>Overview</h2>
+      <h3>Font utility classes</h3>
+      <p>Utility classes, prefixed with <code>govuk-font</code> are used to modify the font size of paragraph / body text or UI elements without adding the associated margins. These classes should be used for visual hierarchy or emphasis only.</p>
+
+      <h3>Heading and body classes</h3>
+
+      <p>The heading and body classes, prefixed with <code>govuk-heading</code> or <code>govuk-body</code> use the same font sizes and line-heights as the utility classes but have margin-bottom applied.</p>
+
+      <h3 class="govuk-heading-m">Uni-directional margins</h3>
+      <p style=";">Margin only flows in one direction, all default margin-top values have been removed. The exception (covered later) is for specific scenarios such as an h2 followed by and h3 or a paragraph followed by an h2. This spacing, applied to the top of the adjacent element is <strong>only added</strong> when a context (such as a wrapper for markdown content) is applied. Without the wrapper, the elements retain their margin-bottom only.<p>
+
+    </div>
+
+  </div>
+
 </div>
 
-<!-- This is missing from GOV.UK elements -->
-<div class="govuk-u-bold-14">
-  GOV.UK frontend toolkit 14px bold heading
-</div>
-<!-- In GOV.UK elements, this is .bold-xsmall -->
-<div class="govuk-u-bold-16">
-  GOV.UK frontend toolkit + GOV.UK elements 16px bold heading
-</div>
-<!-- In GOV.UK elements, this is .bold-small -->
-<div class="govuk-u-bold-19">
-  GOV.UK frontend toolkit + GOV.UK elements 19px bold heading
-</div>
-<!-- In GOV.UK elements, this is .bold-medium -->
-<div class="govuk-u-bold-24">
-  GOV.UK frontend toolkit + GOV.UK elements 24px bold heading
-</div>
-<!-- This is missing from GOV.UK elements -->
-<div class="govuk-u-bold-27">
-  GOV.UK frontend toolkit 27px bold heading
-</div>
-<!-- In GOV.UK elements, this is .bold-large -->
-<div class="govuk-u-bold-36">
-  GOV.UK frontend toolkit + GOV.UK elements 36px bold heading
-</div>
-<!-- In GOV.UK elements, this is .bold-xlarge -->
-<div class="govuk-u-bold-48">
-  GOV.UK frontend toolkit + GOV.UK elements 48px bold heading
-</div>
-<!-- In GOV.UK elements, this is .bold-xxlarge -->
-<div class="govuk-u-bold-80">
-  GOV.UK frontend toolkit + GOV.UK elements 80px bold heading
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--full">
+
+    <hr class="govuk-u-mt-6 govuk-u-mb-5">
+
+    <h2 style="color: #005EA5" class="govuk-heading-l govuk-u-pt-2">Font size override examples (Full scale)</h2>
+
+    <div class="govuk-body govuk-!-f-80 govuk-!-w-bold">
+      govuk-!-f-80 govuk-!-w-bold
+    </div>
+
+    <div class="govuk-body govuk-!-f-regular govuk-!-f-80">
+      govuk-!-f-regular govuk-!-f-80
+    </div>
+
+    <div class="govuk-body govuk-!-f-48 govuk-!-w-bold">
+      govuk-!-f-48 govuk-!-w-bold
+    </div>
+
+    <div class="govuk-body govuk-!-f-regular govuk-!-f-48">
+      govuk-!-f-regular govuk-!-f-48
+    </div>
+
+    <div class="govuk-body govuk-!-f-36 govuk-!-w-bold">
+      govuk-!-f-36 govuk-!-w-bold
+    </div>
+
+    <div class="govuk-body govuk-!-f-regular govuk-!-f-36">
+      govuk-!-f-regular govuk-!-f-36
+    </div>
+
+    <div class="govuk-body govuk-!-f-27 govuk-!-w-bold">
+      govuk-!-f-27 govuk-!-w-bold
+    </div>
+
+    <div class="govuk-body govuk-!-f-regular govuk-!-f-27">
+      govuk-!-f-regular govuk-!-f-27
+    </div>
+
+    <div class="govuk-body govuk-!-f-24 govuk-!-w-bold">
+      govuk-!-f-24 govuk-!-w-bold
+    </div>
+
+    <div class="govuk-body govuk-!-f-regular govuk-!-f-24">
+      govuk-!-f-regular govuk-!-f-24
+    </div>
+
+    <div class="govuk-body govuk-!-f-19 govuk-!-w-bold">
+      govuk-!-f-19 govuk-!-w-bold
+    </div>
+
+    <div class="govuk-body govuk-!-f-regular govuk-!-f-19">
+      govuk-!-f-regular govuk-!-f-19
+    </div>
+
+    <div class="govuk-body govuk-!-f-16 govuk-!-w-bold">
+      govuk-!-f-16 govuk-!-w-bold
+    </div>
+
+    <div class="govuk-body govuk-!-f-regular govuk-!-f-16">
+      govuk-!-f-regular govuk-!-f-16
+    </div>
+
+    <div class="govuk-body govuk-!-f-14 govuk-!-w-bold">
+      govuk-!-f-14 govuk-!-w-bold
+    </div>
+
+    <div class="govuk-body govuk-!-f-regular govuk-!-f-14">
+      govuk-!-f-regular govuk-!-f-14
+    </div>
+
+  </div>
 </div>
 
-<div class="govuk-u-heading-24">
-  GOV.UK frontend toolkit 24px heading
-</div>
-<div class="govuk-u-heading-27">
-  GOV.UK frontend toolkit 27px heading
-</div>
-<div class="govuk-u-heading-36">
-  GOV.UK frontend toolkit 36px heading
-</div>
-<div class="govuk-u-heading-48">
-  GOV.UK frontend toolkit 48px heading
+
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--full govuk-u-mt-4">
+    <h2 style="color: #005EA5" class="govuk-heading-l govuk-u-pt-6">Heading examples</h2>
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+    <div class="govuk-heading-xl">
+      govuk-heading-xl
+    </div>
+
+    <div class="govuk-heading-l">
+      govuk-heading-l
+    </div>
+
+    <div class="govuk-heading-m">
+      govuk-heading-m
+    </div>
+
+    <div class="govuk-heading-s">
+      govuk-heading-s
+    </div>
+
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+
+
+  </div>
+
 </div>
 
-<div class="heading-xlarge">
-  GOV.UK elements heading-xlarge heading
-</div>
-<div class="heading-large">
-  GOV.UK elements heading-large heading
-</div>
-<div class="heading-medium">
-  GOV.UK elements heading-medium heading
-</div>
-<div class="heading-small">
-  GOV.UK elements heading-small heading
+
+
+
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--full govuk-u-mt-4">
+    <h2 style="color: #005EA5" class="govuk-heading-l govuk-u-pt-6">Headings with captions</h2>
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+
+    <h1 class="govuk-heading-xl">
+      <span class="govuk-caption-xl">govuk-caption-xl</span>
+      govuk-heading-xl
+    </h1>
+
+    <h2 class="govuk-heading-l">
+      <span class="govuk-caption-l">govuk-caption-l</span>
+      govuk-heading-l
+    </h2>
+
+    <h3 class="govuk-heading-m">
+      <span class="govuk-caption-m">govuk-caption-m</span>
+      govuk-heading-m
+    </h3>
+
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+
+  </div>
+
 </div>
 
-<div class="govuk-u-copy-14">
-  GOV.UK frontend toolkit 14px copy
-</div>
-<div class="govuk-u-copy-16">
-  GOV.UK frontend toolkit 16px copy
-</div>
-<div class="govuk-u-copy-19">
-  GOV.UK frontend toolkit 19px copy
+
+
+
+<div class="govuk-o-grid">
+  <div class="govuk-o-grid__item govuk-o-grid__item--full govuk-u-mt-4">
+    <h2 style="color: #005EA5" class="govuk-heading-l govuk-u-pt-6">Body examples</h2>
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+    <div class="govuk-body-l">
+      govuk-body-l
+    </div>
+
+    <div class="govuk-body-m">
+      govuk-body-m
+    </div>
+
+    <div class="govuk-body-s">
+      govuk-body-s
+    </div>
+
+    <div class="govuk-body-xs">
+      govuk-body-xs
+    </div>
+
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+  </div>
+
 </div>
 
-<div class="body-text">
-  GOV.UK elements body text
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--full">
+      <hr class="govuk-u-mt-6 govuk-u-mb-5">
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+
+    <div class="govuk-prose-scope">
+
+      <h2 style="margin-top: 40px;">Adjustments to spacing in context</h2>
+
+      <p>When a context is applied, in this case a wrapper called “prose”, adjustments are made to certain elements when placed next to one another.</p>
+
+      <p>For typographic elements, we’re using <code>padding-top</code> to avoid collapsing margins when more / positive spacing is required. If negative spacing is required (usually for heading pairings), use a <strong>negative</strong> <code>margin-top</code>.</p>
+
+      <p>For block elements such as buttons, images and panels spacing is only applied above when wrapped in this context, other wise margin-bottom only defaults apply. <code>margin-top</code> is used over <code>padding-top</code> for these to avoid changing the visual appearance of the component.<p>
+
+      <p style="margin-bottom: 40px;">Styling is only applied to defualt HTML elements such as <code>h1-4</code>, <code>p</code>, <code>ul</code> etc when inside this context. It is important that we don’t override existing markup if a user incorporates GOV.UK Frontend in an existing service</p>
+
+    </div>
+
+  </div>
+
 </div>
+
+
+
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+    <div style="color: #005EA5" class="govuk-heading-m govuk-u-mb-5">
+    With “Prose” container
+    </div>
+
+    <div class="govuk-prose-scope">
+
+      <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+        Context: <code>h3</code> following <code>h2</code>
+      </div>
+
+      <h2>h2</h2>
+
+      <h3>h3</h3>
+
+    </div>
+
+  </div>
+
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+    <div style="color: #005EA5" class="govuk-heading-m govuk-u-mb-5">
+    Without “Prose” container
+    </div>
+
+    <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+      Context: <code>govuk-heading-m</code> following <code>govuk-heading-l</code>
+    </div>
+
+    <h2 class="govuk-heading-l">
+      govuk-heading-l
+    </h3>
+
+    <h3 class="govuk-heading-m">
+      govuk-heading-m
+    </h3>
+
+  </div>
+
+
+  <hr class="govuk-u-mt-6 govuk-u-mb-5">
+
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+    <div class="govuk-prose-scope">
+
+      <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+        Context: <code>h4</code> following <code>h3</code>
+      </div>
+
+      <h3>h3</h3>
+
+      <h4>h4</h4>
+
+    </div>
+
+  </div>
+
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+    <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+      Context: <code>govuk-heading-s</code> following <code>govuk-heading-m</code>
+    </div>
+
+    <h3 class="govuk-heading-m">h3.govuk-heading-m</h3>
+
+    <h4 class="govuk-heading-s">h4.govuk-heading-s</h4>
+
+  </div>
+
+
+  <hr class="govuk-u-mt-6 govuk-u-mb-5">
+
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+    <div class="govuk-prose-scope">
+
+      <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+        Context: <code>govuk-heading-l</code> following <code>govuk-body-l</code>
+      </div>
+
+      <div class="govuk-body-l">
+        In the UK, the Prime Minister leads the government with the support of the Cabinet and ministers. You can find out who runs government and how government is run, as well as learning about the history of government.
+      </div>
+
+      <div class="govuk-heading-l">
+        The Cabinet
+      </div>
+
+      <div class="govuk-body-m">
+        The Cabinet is made up of the senior members of government. Every week during Parliament, members of the Cabinet (Secretaries of State from all departments and some other ministers) meet to discuss the most important issues for the government.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+    <div class="">
+
+      <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+        Context: <code>govuk-heading-l</code> following <code>govuk-body-l</code>
+      </div>
+
+      <div class="govuk-body-l">
+        In the UK, the Prime Minister leads the government with the support of the Cabinet and ministers. You can find out who runs government and how government is run, as well as learning about the history of government.
+      </div>
+
+      <div class="govuk-heading-l">
+        The Cabinet
+      </div>
+
+      <div class="govuk-body-m">
+        The Cabinet is made up of the senior members of government. Every week during Parliament, members of the Cabinet (Secretaries of State from all departments and some other ministers) meet to discuss the most important issues for the government.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <hr style="clear: both;" class="govuk-u-mt-6 govuk-u-mb-5">
+
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+
+    <div class="govuk-prose-scope">
+
+      <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+        Context: <code>govuk-heading-l</code> following <code>govuk-body-m</code>
+      </div>
+
+      <p>
+        The Cabinet is made up of the senior members of government. Every week during Parliament, members of the Cabinet (Secretaries of State from all departments and some other ministers) meet to discuss the most important issues for the government.
+      </p>
+
+      <h2>Ministers</h2>
+
+      <p>
+        Ministers are chosen by the Prime Minister from the members of the House of Commons and House of Lords. They are responsible for the actions, successes and failures of their departments.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+    <div class="">
+
+      <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+        Context: <code>govuk-heading-l</code> following <code>govuk-body-m</code>
+      </div>
+
+      <p class="govuk-body-m">
+        The Cabinet is made up of the senior members of government. Every week during Parliament, members of the Cabinet (Secretaries of State from all departments and some other ministers) meet to discuss the most important issues for the government.
+      </p>
+
+      <h3 class="govuk-heading-l">
+        Ministers
+      </h3>
+
+      <p class="govuk-body-m">
+        Ministers are chosen by the Prime Minister from the members of the House of Commons and House of Lords. They are responsible for the actions, successes and failures of their departments.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <hr style="clear: both;" class="govuk-u-mt-6 govuk-u-mb-5">
+
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+
+    <div class="govuk-prose-scope">
+
+      <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+        Context: <code>h3</code> following <code>p</code>
+      </div>
+
+      <p>
+        The Cabinet is made up of the senior members of government. Every week during Parliament, members of the Cabinet (Secretaries of State from all departments and some other ministers) meet to discuss the most important issues for the government.
+      </p>
+
+      <h3>
+        Ministers
+      </h3>
+
+      <p>
+        Ministers are chosen by the Prime Minister from the members of the House of Commons and House of Lords. They are responsible for the actions, successes and failures of their departments.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--one-half">
+
+      <div class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-4">
+        Context: <code>govuk-heading-m</code> following <code>govuk-body-m</code>
+      </div>
+
+      <p class="govuk-body-m">
+        The Cabinet is made up of the senior members of government. Every week during Parliament, members of the Cabinet (Secretaries of State from all departments and some other ministers) meet to discuss the most important issues for the government.
+      </p>
+
+      <h3 class="govuk-heading-m">
+        Ministers
+      </h3>
+
+      <p class="govuk-body-m">
+        Ministers are chosen by the Prime Minister from the members of the House of Commons and House of Lords. They are responsible for the actions, successes and failures of their departments.
+      </p>
+
+  </div>
+
+
+</div>
+
+
+
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--full">
+    <hr class="govuk-u-mt-6 govuk-u-mb-5">
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+
+
+      <div class="prose">
+
+        <h2 style="margin-top: 40px;">Spacing scale</h2>
+        <p>All defualt margins are applied to the heading classes using a spacing scale using Sass variables</p>
+
+
+        <ul class="govuk-c-list">
+          <li><code>$govuk-spacing-scale-1: 5px;</code></li>
+          <li><code>$govuk-spacing-scale-2: 10px;</code></li>
+          <li><code>$govuk-spacing-scale-3: 15px;</code></li>
+          <li><code>$govuk-spacing-scale-4: 20px;</code></li>
+          <li><code>$govuk-spacing-scale-5: 30px;</code></li>
+          <li><code>$govuk-spacing-scale-6: 40px;</code></li>
+          <li><code>$govuk-spacing-scale-7: 50px;</code></li>
+          <li><code>$govuk-spacing-scale-8: 60px;</code></li>
+        </ul>
+
+
+        <p>These variables are also available as classes to manually add or override spacing when required. For example if you want to add 5px padding on top of an element you can use <code>govuk-u-pt-1</code>, if you want to add 60px of margin-bottom it would be <code>govuk-u-mb-8</code></p>
+
+      </div>
+
+  </div>
+</div>
+
+
+
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--full">
+    <hr class="govuk-u-mt-6 govuk-u-mb-5">
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+
+    <h2 style="color: #005EA5" class="govuk-heading-l govuk-u-mb-8">Gov.uk style content</h2>
+
+    <div class="govuk-prose-scope">
+      <h1>Appeal an asylum support decision</h1>
+
+      <h2>2. Apply to the tribunal</h2>
+      <p>Download and fill in a ‘notice of appeal’ form. You must include:</p>
+
+      <ul class="govuk-c-list govuk-c-list--bullet">
+        <li>why you’re appealing (your ‘grounds of appeal’)</li>
+        <li>a copy of the decision you’re appealing against</li>
+        <li>any documents that help support your appeal</li>
+        <li>whether you’d like a ‘paper’ or ‘oral’ hearing - the tribunal may decide for you</li>
+        <li>why your appeal is late (if it is)</li>
+      </ul>
+
+      <h3>Choose the type of hearing</h3>
+
+      <p>Paper hearings are based on documents only. If you get an oral hearing, you’ll be able to present your case to a judge.</p>
+
+      <a href="/" role="button" class="govuk-c-button govuk-c-button--start">
+        Start now
+      </a>
+
+      <p>If you ask for an oral hearing, you must also include whether:</p>
+
+      <ul class="govuk-c-list govuk-c-list--bullet">
+        <li>you want to go to the hearing</li>
+        <li>you have a legal representative who’ll be at the hearing</li>
+        <li>you need an interpreter</li>
+        <li>you want to take part by video link - you can only do this if you can’t travel to London because of pregnancy, mobility or other health issues</li>
+        <li>why your appeal is late (if it is)</li>
+      </ul>
+
+      <p>You’ll have to travel to London if you have an oral hearing, unless a judge agrees you can take part by video link.</p>
+
+      <p>The Home Office will pay for you to get there (usually by train). You’ll get free accommodation the night before if you have far to travel.</p>
+
+      <h3>Send the form</h3>
+
+      <p>Post, email or fax the notice of appeal form to HM Courts and Tribunals Service. The contact details are on the form.</p>
+
+      <p>Call the helpline if you have any questions about completing the form. The helpline can’t give you legal advice.</p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--full">
+    <hr class="govuk-u-mt-6 govuk-u-mb-5">
+  </div>
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+
+    <h2 style="color: #005EA5" class="govuk-heading-l govuk-u-mb-8">Service style content</h2>
+
+      <h1 class="govuk-heading-xl">Can you get Carer’s Allowance?</h1>
+
+      <fieldset class="govuk-c-fieldset govuk-u-mb-5">
+        <legend class="govuk-c-fieldset__legend govuk-c-fieldset__legend--bold-large">
+          What benefit does the person you provide care for get?
+          <span class="govuk-c-fieldset__hint">Don’t include any benefits they’ve applied for if they haven’t got a decision yet.</span>
+        </legend>
+
+        <div class="govuk-c-radio">
+          <input class="govuk-c-radio__input" id="radio-1" name="radio-group" type="radio" value="waste-animal"><label class="govuk-c-label govuk-c-radio__label" for="radio-1">
+          Personal Independence Payment (PIP) daily living component
+        </label>
+        </div>
+        <div class="govuk-c-radio">
+          <input class="govuk-c-radio__input" id="custom-id" name="radio-group" type="radio" value="waste-mines"><label class="govuk-c-label govuk-c-radio__label" for="custom-id">
+          Disability Living Allowance (DLA) - middle or highest care rate
+        </label>
+        </div>
+        <div class="govuk-c-radio">
+          <input class="govuk-c-radio__input" id="radio-3" name="radio-group" type="radio" value="waste-farm" checked><label class="govuk-c-label govuk-c-radio__label" for="radio-3">
+          Attendance Allowance (AA)
+        </label>
+        </div>
+        <div class="govuk-c-radio">
+          <input class="govuk-c-radio__input" id="radio-3" name="radio-group" type="radio" value="waste-farm" checked><label class="govuk-c-label govuk-c-radio__label" for="radio-3">
+          Constant Attendance Allowance (CAA)
+        </label>
+        </div>
+        <div class="govuk-c-radio">
+          <input class="govuk-c-radio__input" id="radio-3" name="radio-group" type="radio" value="waste-farm" checked><label class="govuk-c-label govuk-c-radio__label" for="radio-3">
+          Armed Forces Independence Payment (AFIP)
+        </label>
+        </div>
+        <p class="govuk-!-f-regular govuk-!-f-19 govuk-u-mb-2">or</p>
+        <div class="govuk-c-radio">
+          <input class="govuk-c-radio__input" id="radio-3" name="radio-group" type="radio" value="waste-farm" checked><label class="govuk-c-label govuk-c-radio__label" for="radio-3">
+          None of these benefits
+        </label>
+        </div>
+
+      </fieldset>
+
+      <input value="Next" type="submit" class="govuk-c-button">
+
+
+      <hr class="govuk-u-mt-7 govuk-u-mb-8">
+
+
+      <h1 class="govuk-heading-xl govuk-u-mb-4">Taxing a vehicle</h1>
+
+      <fieldset class="govuk-c-fieldset govuk-u-mb-5">
+
+
+        <div class="govuk-c-radio">
+          <input class="govuk-c-radio__input" id="radio-1" name="radio-group" type="radio" value="waste-animal"><label class="govuk-c-label govuk-c-radio__label" for="radio-1">
+          I have the V5C Registration certificate (logbook) printed in my name
+        </label>
+        </div>
+        <div class="govuk-c-radio">
+          <input class="govuk-c-radio__input" id="custom-id" name="radio-group" type="radio" value="waste-mines"><label class="govuk-c-label govuk-c-radio__label" for="custom-id">
+          I have the Last Chance Letter printed in my name
+        </label>
+        </div>
+        <div class="govuk-c-radio">
+          <input class="govuk-c-radio__input" id="radio-3" name="radio-group" type="radio" value="waste-farm" checked><label class="govuk-c-label govuk-c-radio__label" for="radio-3">
+          I have the V5C/2 new keeper supplement (green slip)
+        </label>
+        </div>
+
+
+      </fieldset>
+
+      <p class="govuk-u-mb-4"><a href="#" class="govuk-c-link">I don't have any of these documents</a></p>
+
+      <details class="govuk-c-details">
+        <summary class="govuk-c-details__summary">
+          <span class="govuk-c-details__summary-text">
+            Need help?
+          </span>
+        </summary>
+        <div class="govuk-c-border govuk-c-border--left-narrow">
+          <div class="govuk-c-details__text">
+            We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post.
+          </div>
+        </div>
+      </details>
+
+      <input value="Continue" type="submit" class="govuk-c-button govuk-u-mt-4 govuk-u-mb-4">
+
+      <hr>
+
+      <p><a href="#" class="govuk-c-link govuk-c-body-19">Cancel application</a></p>
+
+
+      <hr class="govuk-u-mt-7 govuk-u-mb-8">
+
+
+      <h1 class="govuk-heading-xl">Calculate your employee’s statutory sick pay</h1>
+
+      <fieldset class="govuk-c-fieldset govuk-u-mb-5">
+
+        <legend class="govuk-c-fieldset__legend govuk-c-fieldset__legend--bold-large">
+          Is your employee getting any of the following?
+          <span class="govuk-c-fieldset__hint">If none apply just click ‘Next step’</span>
+        </legend>
+
+        <div class="govuk-c-checkbox">
+          <input class="govuk-c-checkbox__input" id="waste-types-1" name="waste-types" type="checkbox" value="waste-animal"><label class="govuk-c-label govuk-c-checkbox__label" for="waste-types-1">
+          Statutory Maternity Pay
+        </label>
+        </div>
+        <div class="govuk-c-checkbox">
+          <input class="govuk-c-checkbox__input" id="custom-id" name="waste-types" type="checkbox" value="waste-mines"><label class="govuk-c-label govuk-c-checkbox__label" for="custom-id">
+          Maternity Allowance
+        </label>
+        </div>
+        <div class="govuk-c-checkbox">
+          <input class="govuk-c-checkbox__input" id="waste-types-3" name="waste-types" type="checkbox" value="waste-farm" ><label class="govuk-c-label govuk-c-checkbox__label" for="waste-types-3">
+          Statutory Paternity Pay
+        </label>
+        </div>
+
+        <div class="govuk-c-checkbox">
+          <input class="govuk-c-checkbox__input" id="waste-types-3" name="waste-types" type="checkbox" value="waste-farm" ><label class="govuk-c-label govuk-c-checkbox__label" for="waste-types-3">
+          Statutory Adoption Pay
+        </label>
+        </div>
+
+        <div class="govuk-c-checkbox">
+          <input class="govuk-c-checkbox__input" id="waste-types-3" name="waste-types" type="checkbox" value="waste-farm" ><label class="govuk-c-label govuk-c-checkbox__label" for="waste-types-3">
+          Shared Parental Leave and Pay
+        </label>
+        </div>
+
+
+      </fieldset>
+
+
+      <input value="Next step" type="submit" class="govuk-c-button  govuk-u-mb-4">
+
+
+
+
+      <hr class="govuk-u-mt-7 govuk-u-mb-8">
+
+
+      <h1 class="govuk-heading-xl">Calculate your leave and pay when you have a child</h1>
+
+      <fieldset class="govuk-c-fieldset govuk-u-mb-5">
+        <legend class="govuk-c-fieldset__legend govuk-c-fieldset__legend--bold-large">
+          When is the baby due?
+        </legend>
+
+        <div class="govuk-c-date-input" id="dob">
+            <div class="govuk-c-date-input__item govuk-c-date-input__item--day">
+              <label class="govuk-c-label govuk-c-date-input__label" for="dob-day">
+          Day</label>
+        <input class="govuk-c-input govuk-c-date-input__input undefined" id="dob-day" name="dob-day" type="text">
+        </div>
+            <div class="govuk-c-date-input__item govuk-c-date-input__item--month">
+              <label class="govuk-c-label govuk-c-date-input__label" for="dob-month">
+          Month
+        </label>
+        <input class="govuk-c-input govuk-c-date-input__input undefined" id="dob-month" name="dob-month" type="text">
+        </div>
+            <div class="govuk-c-date-input__item govuk-c-date-input__item--year">
+              <label class="govuk-c-label govuk-c-date-input__label" for="dob-year">
+          Year
+        </label>
+        <input class="govuk-c-input govuk-c-date-input__input undefined" id="dob-year" name="dob-year" type="text">
+        </div>
+          </div>
+
+      </fieldset>
+
+
+      <input value="Next step" type="submit" class="govuk-c-button  govuk-u-mb-4">
+
+
+      <hr class="govuk-u-mt-7 govuk-u-mb-8">
+
+
+      <h1 class="govuk-heading-xl">Universal Credit online</h1>
+
+      <p class="govuk-body-m">Use this service to:</p>
+
+      <ul class="govuk-c-list govuk-c-list--bullet">
+        <li>start a Universal Credit claim</li>
+        <li>switch your Universal Credit account online</li>
+        <li>join your partner's Universal Credit claim</li>
+      </ul>
+
+      <label class="govuk-c-label" for="input-1">
+        Enter your postcode
+      </label>
+      <input class="govuk-c-input govuk-u-mb-5" style="max-width: 200px" id="input-1" name="test-name" type="text">
+
+
+      <input value="Start" type="submit" class="govuk-c-button govuk-u-mb-5" style="display: block;">
+
+      <details class="govuk-c-details govuk-u-pt-2 govuk-u-mb-5">
+        <summary class="govuk-c-details__summary">
+          <span class="govuk-c-details__summary-text">
+            Don't know what postcode to use?
+          </span>
+        </summary>
+        <div class="govuk-c-border govuk-c-border--left-narrow">
+          <div class="govuk-c-details__text">
+            We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post.
+          </div>
+        </div>
+      </details>
+
+      <h3 class="govuk-heading-m govuk-u-mb-2">Already got an online account?</h3>
+      <p class="govuk-body-m"><a href="#">Sign in</a> if you already have an online account and want to return to a claim.</p>
+
+  </div>
+
+</div>
+
+ <hr class="govuk-u-mt-7 govuk-u-mb-8">
+
+<div class="govuk-o-grid">
+
+  <div class="govuk-o-grid__item govuk-o-grid__item--two-thirds">
+
+    <div class="prose">
+
+      <h2>Impact on components</h2>
+
+      <p>All components should aim to use the spacing scale for internal padding and margin. They should also have a default margin-bottom that stems from typography margins</p>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
 
 {% endblock %}

@@ -134,12 +134,20 @@
   // Add a negative top margin to headings that appear directly after other
   // headings
 
-  .govuk-heading-l + .govuk-heading-m {
+  %heading-m-after-heading-l {
     margin-top: -$govuk-spacing-scale-1;
   }
 
-  .govuk-heading-m + .govuk-heading-s {
+  .govuk-heading-l + .govuk-heading-m {
+    @extend %heading-m-after-heading-l;
+  }
+
+  %heading-s-after-heading-m {
     margin-top: -$govuk-spacing-scale-2;
+  }
+
+  .govuk-heading-m + .govuk-heading-s {
+    @extend %heading-s-after-heading-m;
   }
 
   // Add top padding to headings that appear directly after paragraphs
@@ -152,8 +160,7 @@
     }
   }
 
-  .govuk-body-m  + .govuk-heading-l,
-  .govuk-body-s  + .govuk-heading-l {
+  %heading-l-after-body {
     padding-top: $govuk-spacing-scale-3;
 
     @include mq($from: tablet) {
@@ -161,8 +168,12 @@
     }
   }
 
-  .govuk-body-m + .govuk-heading-m,
-  .govuk-body-s + .govuk-heading-m {
+  .govuk-body-m  + .govuk-heading-l,
+  .govuk-body-s  + .govuk-heading-l {
+    @extend %heading-l-after-body;
+  }
+
+  %heading-m-after-body {
     padding-top: $govuk-spacing-scale-1;
 
     @include mq($from: tablet) {
@@ -170,4 +181,8 @@
     }
   }
 
+  .govuk-body-m + .govuk-heading-m,
+  .govuk-body-s + .govuk-heading-m {
+    @extend %heading-m-after-body;
+  }
 }
