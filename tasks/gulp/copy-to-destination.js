@@ -10,6 +10,7 @@ const filter = require('gulp-filter')
 const flatten = require('gulp-flatten')
 const rename = require('gulp-rename')
 const gulpif = require('gulp-if')
+const postcssScss = require('postcss-scss')
 
 let scssFiles = filter([configPaths.src + '**/*.scss'], {restore: true})
 let icons = filter([configPaths.src + 'globals/icons/*'], {restore: true})
@@ -40,9 +41,8 @@ gulp.task('copy-files', () => {
   .pipe(replace('//end:devonly', 'end:devonly*/'))
   .pipe(postcss([
     // postcssnormalize,
-    autoprefixer,
-    require('postcss-nested')
-  ], {syntax: require('postcss-scss')}))
+    autoprefixer
+  ], {syntax: postcssScss}))
   .pipe(scssFiles.restore)
   .pipe(icons)
   .pipe(flatten({includeParents: -1}))
