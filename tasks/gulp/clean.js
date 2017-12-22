@@ -8,8 +8,21 @@ const del = require('del')
 // Removes all old files, except for package.json
 // and README in all package
 // ------------------------------------------------------
-const isPackages = (taskArguments.destination === 'packages') || false
 
 gulp.task('clean', () => {
-  return del.sync(isPackages ? [taskArguments.destination + '/**/**/*', '!' + taskArguments.destination, '!' + taskArguments.destination + '/*', '!' + taskArguments.destination + '/**/package.json', '!' + taskArguments.destination + '/all/README.md'] : [taskArguments.destination + '/**/*'])
+  let destination = taskArguments.destination
+
+  if (destination === 'packages') {
+    return del.sync([
+      `${destination}/**/**/*`,
+      `!${destination}`,
+      `!${destination}/*`,
+      `!${destination}/**/package.json`,
+      `!${destination}/all/README.md`
+    ])
+  } else {
+    return del.sync([
+      `${destination}/**/*`
+    ])
+  }
 })
