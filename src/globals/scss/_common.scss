@@ -24,10 +24,11 @@
 @import "tools/px-to-em";
 
 // Helpers
+@import "helpers/media-queries"; // Media queries are needed by other helpers
 @import "helpers/arrow";
 @import "helpers/clearfix";
 @import "helpers/device-pixels";
-@import "helpers/media-queries";
+@import "helpers/form-controls";
 @import "helpers/typography";
 @import "helpers/spacing";
 @import "helpers/visually-hidden";
